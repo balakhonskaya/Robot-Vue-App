@@ -2,6 +2,10 @@
     <div>
   <div class="top-row">
     <div class="top part">
+     <div class="robot-name">
+      {{selectedRobot.head.title}}
+      <span class="sale" v-if="selectedRobot.head.onSale">Sale!</span>
+    </div>
       <img :src="selectedRobot.head.imageUrl" alt="head" />
       <button @:click="selectPreviousHead()" class="prev-selector">&#9668;</button>
       <button @:click="selectNextHead()" class="next-selector">&#9658;</button>
@@ -9,7 +13,7 @@
   </div>
   <div class="middle-row">
     <div class="left part">
-      <img :src="selectedRobot.LeftArm.imageUrl" alt="left arm" />
+      <img :src="selectedRobot.leftArm.imageUrl" alt="left arm" />
       <button @:click="selectPreviousLeftArm()" class="prev-selector">&#9650;</button>
       <button @:click="selectNextLeftArm()" class="next-selector">&#9660;</button>
     </div>
@@ -19,7 +23,7 @@
       <button @:click="selectNextTorso()" class="next-selector">&#9658;</button>
     </div>
     <div class="right part">
-      <img :src="selectedRobot.RightArm.imageUrl" alt="right arm" />
+      <img :src="selectedRobot.rightArm.imageUrl" alt="right arm" />
       <button @:click="selectPreviousRightArm()" class="prev-selector">&#9650;</button>
       <button @:click="selectNextRightArm()" class="next-selector">&#9660;</button>
     </div>
@@ -58,10 +62,10 @@ export default {
       selectedBaseIndex: 0,
     };
   },
-  computet: {
+  computed: {
     selectedRobot() {
       return {
-        head: this.availableParts.head[this.selectedHeadIndex],
+        head: this.availableParts.heads[this.selectedHeadIndex],
         leftArm: this.availableParts.arms[this.selectedLeftArmIndex],
         rightArm: this.availableParts.arms[this.selectedRightArmIndex],
         torso: this.availableParts.torsos[this.selectedTorsoIndex],
@@ -240,5 +244,16 @@ export default {
 
 .right .next-selector {
   right: -3px;
+}
+
+.robot-name {
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
+}
+
+.sale {
+  color: red;
 }
 </style>
