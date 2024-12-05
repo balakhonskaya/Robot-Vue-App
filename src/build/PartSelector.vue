@@ -18,6 +18,8 @@ const props = defineProps({
     validator(value) { return ['top', 'left', 'right', 'bottom', 'center', 'base'].includes(value); },
   },
 });
+
+const emit = defineEmits(['partSelected']);
 const selectedPartIndex = ref(0);
 const selectedPart = computed(() => props.parts[selectedPartIndex.value]);
 
@@ -36,7 +38,7 @@ const selectNextPart = () => {
     selectedPartIndex.value,
     props.parts.length,
   );
-  console.log(selectedPart.value);
+  emit('partSelected', selectedPart);
 };
 
 const selectPreviousPart = () => {
@@ -44,6 +46,7 @@ const selectPreviousPart = () => {
     selectedPartIndex.value,
     props.parts.length,
   );
+  emit('partSelected', selectedPart);
 };
 </script>
 

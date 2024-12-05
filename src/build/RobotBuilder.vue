@@ -6,15 +6,20 @@
       {{selectedRobot.head.title}}
       <span class="sale" v-if="selectedRobot.head.onSale">Sale!</span>
     </div>
-    <PartSelector :parts="availableParts.heads" position="top" />
+    <PartSelector :parts="availableParts.heads" position="top"
+    @partSelected="part => selectedRobot.head=part"/>
   </div>
   <div class="middle-row">
-    <PartSelector :parts="availableParts.arms" position="left" />
-    <PartSelector :parts="availableParts.torsos" position="center" />
-    <PartSelector :parts="availableParts.arms" position="right" />
+    <PartSelector :parts="availableParts.arms" position="left"
+    @partSelected="part => selectedRobot.leftArm=part" />
+    <PartSelector :parts="availableParts.torsos" position="center"
+    @partSelected="part => selectedRobot.torso=part" />
+    <PartSelector :parts="availableParts.arms" position="right"
+    @partSelected="part => selectedRobot.rightArm=part" />
   </div>
   <div class="bottom-row">
-    <PartSelector :parts="availableParts.bases" position="bottom" />
+    <PartSelector :parts="availableParts.bases" position="bottom"
+    @partSelected="part => selectedRobot.bottom=part" />
   </div>
   <h1>Cart</h1>
   <table>
@@ -28,6 +33,7 @@
       <tr v-for="(robot, index) in cart" :key="index">
         <td>{{ robot.head.title }}</td>
         <td class="cost">{{ toCurrency(robot.cost) }}</td>
+        <!--<td class="cost"><pre>{{ robot }}</pre></td>-->
       </tr>
     </tbody>
   </table>
@@ -51,13 +57,12 @@ const selectedRobot = ref({
 
 const addToCart = () => {
   const robot = selectedRobot.value;
-  const cost = robot.head.cost +
-    robot.leftArm.cost +
-    robot.torso.cost +
-    robot.rightArm.cost +
-    robot.base.cost;
+  const cost = Number(robot.head.cost) +
+    Number(robot.leftArm.cost) +
+    Number(robot.torso.cost) +
+    Number(robot.rightArm.cost) +
+    Number(robot.bottom.cost);
   cart.value.push({ ...robot, cost });
-  console.log(cart.value.length);
 };
 
 </script>
