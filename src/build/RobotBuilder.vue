@@ -51,17 +51,17 @@ const selectedRobot = ref({
   head: {},
   leftArm: {},
   rightArm: {},
-  base: {},
+  bottom: {},
   torso: {},
 });
 
 const addToCart = () => {
   const robot = selectedRobot.value;
-  const cost = Number(robot.head.cost) +
-    Number(robot.leftArm.cost) +
-    Number(robot.torso.cost) +
-    Number(robot.rightArm.cost) +
-    Number(robot.bottom.cost);
+  const cost = robot.head.cost +
+    robot.leftArm.cost +
+    robot.torso.cost +
+    robot.rightArm.cost +
+    robot.bottom.cost;
   cart.value.push({ ...robot, cost });
 };
 
