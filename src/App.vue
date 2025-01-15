@@ -113,4 +113,8 @@ ul {
   height: 30px;
   margin: 0 10px 10px 0;
 }
+
+.router-link-active {
+  color: white;
+}
 </style>
