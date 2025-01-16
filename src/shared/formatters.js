@@ -1,3 +1,3 @@
-export default function toCurrency(amount) {
+export function toCurrency(amount) {
   return `$${amount.toFixed(2)}`;
 }
