@@ -45,7 +45,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(robot, index) in cart" :key="index">
+      <tr v-for="(robot, index) in cartStore.cart" :key="index">
         <td>{{ robot.head.title }}</td>
         <td class="cost">{{ toCurrency(robot.cost) }}</td>
         <!--<td class="cost"><pre>{{ robot }}</pre></td>-->
@@ -59,9 +59,10 @@ import { ref } from 'vue';
 import toCurrency from '@/shared/formatters';
 import PartSelector from './PartSelector.vue';
 import parts from '../data/parts';
+import { useCartStore } from '../stores/cartStore';
 
 const availableParts = parts;
-const cart = ref([]);
+const cartStore = useCartStore();
 const selectedRobot = ref({
   head: {},
   leftArm: {},
@@ -77,7 +78,8 @@ const addToCart = () => {
     robot.torso.cost +
     robot.rightArm.cost +
     robot.bottom.cost;
-  cart.value.push({ ...robot, cost });
+  cartStore.cart.push({ ...robot, cost });
+  console.log(cartStore.cart.length);
 };
 
 </script>
