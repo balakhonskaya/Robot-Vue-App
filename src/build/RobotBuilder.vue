@@ -56,7 +56,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import toCurrency from '@/shared/formatters';
+import toCurrency from '../shared/formatters';
 import PartSelector from './PartSelector.vue';
 import parts from '../data/parts';
 import { useCartStore } from '../stores/cartStore';
